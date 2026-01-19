@@ -201,7 +201,7 @@ export const Step9: React.FC<{ lang: Language }> = ({ lang }) => {
         
         <div className="text-center space-y-1">
           <p className="text-xs text-slate-500 font-bold uppercase tracking-[0.3em] animate-pulse">
-            زن زندگی آزادی
+          زنده باد ایران آزاد! / Long Live Free Iran!
           </p>
           <p className="text-[9px] text-slate-400 font-medium italic">
             Created with Google AI Studio
