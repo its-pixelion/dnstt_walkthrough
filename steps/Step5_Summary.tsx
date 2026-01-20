@@ -7,6 +7,8 @@ export const Step6: React.FC<{ lang: Language }> = ({ lang }) => {
   const isRtl = lang === 'fa';
   const managementCmd = "dnstt-deploy";
   const passwdCmd = "sudo passwd dnstt";
+  const nanoCmd = "sudo nano /etc/ssh/sshd_config";
+  const restartSshCmd = "sudo systemctl restart ssh";
 
   const menuOptions = [
     {
@@ -46,6 +48,10 @@ export const Step6: React.FC<{ lang: Language }> = ({ lang }) => {
     }
   ];
 
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+  };
+
   return (
     <div className="space-y-6">
       <p className="text-slate-700">
@@ -60,61 +66,11 @@ export const Step6: React.FC<{ lang: Language }> = ({ lang }) => {
         <div className="flex items-center justify-between">
           <code className="text-blue-400 font-mono text-lg">{managementCmd}</code>
           <button 
-            onClick={() => navigator.clipboard.writeText(managementCmd)}
+            onClick={() => copyToClipboard(managementCmd)}
             className="text-slate-500 hover:text-white transition-colors"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
           </button>
-        </div>
-      </div>
-
-      {/* User Management & Security Section - UPDATED TO OPTIONAL/RECOMMENDED */}
-      <div className="bg-emerald-50 border border-emerald-100 p-6 rounded-2xl space-y-4 shadow-sm relative overflow-hidden">
-        <div className="absolute top-0 right-0 left-0 h-1 bg-emerald-200 opacity-50"></div>
-        <div className={`flex flex-wrap items-center gap-2 ${isRtl ? 'flex-row-reverse' : 'flex-row'}`}>
-          <div className="flex items-center gap-2">
-            <svg className="w-6 h-6 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-            <span className="font-bold text-emerald-900 text-base md:text-lg">{isRtl ? "امنیت و مدیریت کاربران" : "Security & User Management"}</span>
-          </div>
-          <div className={`flex gap-1.5 ${isRtl ? 'flex-row-reverse mr-auto' : 'flex-row ml-auto'}`}>
-            <span className="px-2 py-0.5 bg-white border border-emerald-200 text-emerald-600 text-[9px] font-bold rounded uppercase tracking-wider">
-              {isRtl ? "اختیاری" : "Optional"}
-            </span>
-            <span className="px-2 py-0.5 bg-emerald-600 text-white text-[9px] font-bold rounded uppercase tracking-wider">
-              {isRtl ? "توصیه شده" : "Recommended"}
-            </span>
-          </div>
-        </div>
-
-        <div className={`text-sm text-emerald-800 space-y-4 leading-relaxed ${isRtl ? 'text-right' : 'text-left'}`}>
-          <p className="text-xs md:text-sm">
-            {isRtl 
-              ? "انجام این مراحل برای پایداری سرویس اجباری نیست، اما به دلایل امنیتی شدیداً توصیه می‌شود تا دسترسی کاربر اصلی (root) را با دیگران به اشتراک نگذارید." 
-              : "While not strictly required for the service to function, these steps are highly recommended for security to avoid sharing root access."}
-          </p>
-          
-          <div className="space-y-2">
-            <p className="font-bold text-emerald-900 text-xs md:text-sm">
-              {isRtl ? "۱. تعیین رمز عبور برای کاربر جدید (dnstt):" : "1. Assign a password to the new user (dnstt):"}
-            </p>
-            <div className="bg-white/60 p-3 rounded-xl font-mono text-emerald-900 text-[11px] md:text-xs border border-emerald-200 flex items-center justify-between" dir="ltr">
-              <code>{passwdCmd}</code>
-              <button onClick={() => navigator.clipboard.writeText(passwdCmd)} className="hover:text-emerald-600 transition-colors">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
-              </button>
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            <p className="font-bold text-emerald-900 text-xs md:text-sm">
-              {isRtl ? "۲. بررسی تنظیمات SSH:" : "2. Check SSH Configuration:"}
-            </p>
-            <p className="text-[11px] md:text-xs">
-              {isRtl 
-                ? "مطمئن شوید در فایل /etc/ssh/sshd_config عبارت PasswordAuthentication روی yes تنظیم شده باشد تا ورود با رمز عبور فعال بماند." 
-                : "Ensure 'PasswordAuthentication' is set to 'yes' in /etc/ssh/sshd_config to enable password-based logins."}
-            </p>
-          </div>
         </div>
       </div>
 
@@ -148,6 +104,102 @@ export const Step6: React.FC<{ lang: Language }> = ({ lang }) => {
             ? "برای مشاهده لاگ‌ها به صورت زنده (گزینه ۴)، پس از مشاهده اطلاعات مورد نیاز، از کلید ترکیبی Ctrl+C برای خروج از محیط لاگ و بازگشت به خط فرمان استفاده کنید." 
             : "When viewing real-time logs (Option 4), use Ctrl+C to exit the log viewer and return to the command prompt."}
         </p>
+      </div>
+
+      {/* User Management & Security Section */}
+      <div className="bg-emerald-50 border border-emerald-100 p-6 rounded-2xl space-y-5 shadow-sm relative overflow-hidden">
+        <div className="absolute top-0 right-0 left-0 h-1 bg-emerald-200 opacity-50"></div>
+        <div className={`flex flex-wrap items-center gap-2 ${isRtl ? 'flex-row-reverse' : 'flex-row'}`}>
+          <div className="flex items-center gap-2">
+            <svg className="w-6 h-6 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+            <span className="font-bold text-emerald-900 text-base md:text-lg">{isRtl ? "امنیت و مدیریت کاربران" : "Security & User Management"}</span>
+          </div>
+          <div className={`flex gap-1.5 ${isRtl ? 'flex-row-reverse mr-auto' : 'flex-row ml-auto'}`}>
+            <span className="px-2 py-0.5 bg-white border border-emerald-200 text-emerald-600 text-[9px] font-bold rounded uppercase tracking-wider">
+              {isRtl ? "اختیاری" : "Optional"}
+            </span>
+            <span className="px-2 py-0.5 bg-emerald-600 text-white text-[9px] font-bold rounded uppercase tracking-wider">
+              {isRtl ? "توصیه شده" : "Recommended"}
+            </span>
+          </div>
+        </div>
+
+        <div className={`text-sm text-emerald-800 space-y-6 leading-relaxed ${isRtl ? 'text-right' : 'text-left'}`}>
+          <p className="text-xs md:text-sm">
+            {isRtl 
+              ? "انجام این مراحل برای پایداری سرویس اجباری نیست، اما به دلایل امنیتی شدیداً توصیه می‌شود تا دسترسی کاربر اصلی (root) را با دیگران به اشتراک نگذارید." 
+              : "While not strictly required for the service to function, these steps are highly recommended for security to avoid sharing root access."}
+          </p>
+          
+          {/* Step 1: Password Assignment */}
+          <div className="space-y-3">
+            <p className="font-bold text-emerald-900 text-xs md:text-sm">
+              {isRtl ? "۱. تعیین رمز عبور برای کاربر جدید (dnstt):" : "1. Assign a password to the new user (dnstt):"}
+            </p>
+            <div className="bg-white/60 p-3 rounded-xl font-mono text-emerald-900 text-[11px] md:text-xs border border-emerald-200 flex items-center justify-between shadow-inner" dir="ltr">
+              <code>{passwdCmd}</code>
+              <button onClick={() => copyToClipboard(passwdCmd)} className="hover:text-emerald-600 transition-colors">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+              </button>
+            </div>
+          </div>
+
+          {/* Step 2: SSH Config Editing */}
+          <div className="space-y-4">
+            <p className="font-bold text-emerald-900 text-xs md:text-sm">
+              {isRtl ? "۲. ویرایش تنظیمات SSH:" : "2. Edit SSH Configuration:"}
+            </p>
+            <p className="text-[11px] md:text-xs text-emerald-700">
+              {isRtl 
+                ? "برای اینکه بتوانید با رمز عبور وارد شوید، باید فایل تنظیمات SSH را ویرایش کنید:" 
+                : "To allow password-based logins, you must edit the SSH configuration file:"}
+            </p>
+            
+            {/* Nano command block */}
+            <div className="bg-slate-900/90 text-white p-4 rounded-xl font-mono text-[10px] md:text-xs border border-slate-700 shadow-xl" dir="ltr">
+              <div className="flex justify-between mb-2">
+                <span className="text-slate-500 uppercase tracking-tighter text-[9px]">Edit Config</span>
+                <button onClick={() => copyToClipboard(nanoCmd)} className="text-slate-500 hover:text-white transition-colors">
+                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                </button>
+              </div>
+              <code className="text-emerald-400">{nanoCmd}</code>
+            </div>
+
+            {/* Nano walkthrough steps */}
+            <div className={`bg-white/40 p-4 rounded-xl border border-emerald-200 text-[11px] md:text-xs space-y-2 ${isRtl ? 'text-right' : 'text-left'}`}>
+              <div className={`flex items-start gap-2 ${isRtl ? 'flex-row-reverse' : 'flex-row'}`}>
+                <span className="shrink-0 w-4 h-4 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold text-[9px]">1</span>
+                <span>{isRtl ? "با کلیدهای جهت‌نما به پایین بروید تا عبارت PasswordAuthentication را پیدا کنید." : "Use arrow keys to scroll down and find 'PasswordAuthentication'."}</span>
+              </div>
+              <div className={`flex items-start gap-2 ${isRtl ? 'flex-row-reverse' : 'flex-row'}`}>
+                <span className="shrink-0 w-4 h-4 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold text-[9px]">2</span>
+                <span>{isRtl ? "آن را به yes تغییر دهید (اگر قبل از آن علامت # است، آن را حذف کنید)." : "Set it to 'yes' (remove the '#' character if it exists at the start of the line)."}</span>
+              </div>
+              <div className={`flex items-start gap-2 ${isRtl ? 'flex-row-reverse' : 'flex-row'}`}>
+                <span className="shrink-0 w-4 h-4 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold text-[9px]">3</span>
+                <span>{isRtl ? "برای ذخیره: کلید Ctrl + O و سپس Enter را بزنید." : "To save: Press Ctrl + O and then Enter."}</span>
+              </div>
+              <div className={`flex items-start gap-2 ${isRtl ? 'flex-row-reverse' : 'flex-row'}`}>
+                <span className="shrink-0 w-4 h-4 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold text-[9px]">4</span>
+                <span>{isRtl ? "برای خروج: کلید Ctrl + X را بزنید." : "To exit: Press Ctrl + X."}</span>
+              </div>
+            </div>
+
+            {/* SSH Restart Command */}
+            <p className="text-[11px] md:text-xs text-emerald-700 mt-4">
+              {isRtl 
+                ? "در نهایت، برای اعمال تغییرات، سرویس SSH را ری‌استارت کنید:" 
+                : "Finally, restart the SSH service to apply the changes:"}
+            </p>
+            <div className="bg-white/60 p-3 rounded-xl font-mono text-emerald-900 text-[11px] md:text-xs border border-emerald-200 flex items-center justify-between shadow-inner" dir="ltr">
+              <code>{restartSshCmd}</code>
+              <button onClick={() => copyToClipboard(restartSshCmd)} className="hover:text-emerald-600 transition-colors">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

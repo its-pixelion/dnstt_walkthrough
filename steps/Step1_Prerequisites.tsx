@@ -19,8 +19,9 @@ export const Step1: React.FC<{ lang: Language }> = ({ lang }) => {
             <li>
               <strong>نام دامنه:</strong> 
               <span className="text-red-600 font-bold block mt-1">ترجیحاً از دامنه‌های .ir استفاده نکنید.</span>
-              دامنه‌های رایج مانند .com، .net و .org بهترین گزینه هستند.
-              <span className="text-slate-500 text-xs block mt-1 ps-5 italic">می‌توانید از <strong>Namecheap</strong> با شروع قیمت حدود ۳ تا ۴ یورو برای سال اول تهیه کنید.</span>
+              به دنبال ارزان‌ترین دامنه‌ها باشید اما <strong>از دامنه‌های رایگان استفاده نکنید</strong>. 
+              پسوندهای رایج مانند .com، .net و .org بهترین گزینه هستند زیرا کمتر احتمال دارد توسط سیستم‌های فیلترینگ مسدود شوند.
+              <span className="text-slate-500 text-xs block mt-1 ps-5 italic">می‌توانید از <strong>Namecheap</strong> یا <strong>Cloudflare</strong> دامنه‌های ارزان (حدود ۳ تا ۵ یورو) تهیه کنید.</span>
             </li>
           </ul>
         </>
@@ -37,8 +38,9 @@ export const Step1: React.FC<{ lang: Language }> = ({ lang }) => {
             <li>
               <strong>Domain Name:</strong> 
               <span className="text-red-600 font-bold block mt-1">Preferably avoid ".ir" domains.</span>
-              Prefer common TLDs like .com, .net, .org, or .xyz.
-              <span className="text-slate-500 text-xs block mt-1 ps-5 italic">Available via <strong>Namecheap</strong> starting from ~€3-4.</span>
+              Look for the cheapest available domains but <strong>avoid free ones</strong> (like .tk or .ml). 
+              Common TLDs like .com, .net, or .org are less likely to be blocked by advanced filtering systems.
+              <span className="text-slate-500 text-xs block mt-1 ps-5 italic">Available via <strong>Namecheap</strong> or <strong>Cloudflare</strong> starting from ~€3-5.</span>
             </li>
           </ul>
         </>

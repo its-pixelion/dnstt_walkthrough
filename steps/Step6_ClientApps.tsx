@@ -61,8 +61,8 @@ export const Step7: React.FC<{ lang: Language }> = ({ lang }) => {
         </div>
         <p className="text-sm text-red-700 leading-relaxed">
           {isRtl 
-            ? "به دلایل امنیتی و دسترسی‌های اینترنت، ما نمی‌توانیم لینک‌های مستقیم دانلود فایل‌های نصبی (APK) را برای کاربران داخل ایران ارائه دهیم. لطفاً از منابع رسمی (گوگل پلی/اپ استور) استفاده کنید یا فایل‌ها را از طریق فردی مورد اعتماد در سرویس‌های داخلی بارگذاری و دریافت نمایید." 
-            : "For security reasons and local network restrictions, we do not provide direct APK download links. Please use official stores or ask someone you trust to upload the files to a trusted local service."}
+            ? "به دلایل امنیتی و دسترسی‌های اینترنت، ما نمی‌توانیم لینک‌های مستقیم دانلود فایل‌های نصبی (APK) را برای کاربران داخل ایران ارائه دهیم. لطفاً فایل‌ها را از طریق فردی مورد اعتماد در سرویس‌های داخلی بارگذاری و دریافت نمایید. با جستجو در توییتر و یا تلگرام می‌توانید افراد یا گروه‌هایی را بیابید که این فایل‌ها را به اشتراک می‌گذارند." 
+            : "For security reasons and local network restrictions, we do not provide direct APK download links. Please ask someone you trust to upload the files to a trusted local service. You can find individuals or groups sharing these files by searching on Twitter/X or Telegram."}
         </p>
       </div>
     </div>
