@@ -50,6 +50,9 @@ export const Step7: React.FC<{ lang: Language }> = ({ lang }) => {
             <a href="https://apps.apple.com/us/app/http-injector/id1659992827" target="_blank" className="flex items-center justify-between p-3 bg-slate-50 rounded-xl hover:bg-blue-50 transition-colors text-sm font-medium border border-slate-100">
               HTTP Injector <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
             </a>
+            <a href="https://apps.apple.com/us/app/anybridge/id6749492090" target="_blank" className="flex items-center justify-between p-3 bg-slate-50 rounded-xl hover:bg-blue-50 transition-colors text-sm font-medium border border-slate-100">
+              AnyBridge <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+            </a>
           </div>
         </div>
       </div>
